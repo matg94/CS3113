@@ -169,6 +169,29 @@ int main(int argc, char *argv[])
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
 
+		panelOne->update();
+		panelTwo->update();
+		panelOne->pos += panelOne->vel*elapsed;
+		if (ball->xVel > 0) {
+			if (panelTwo->pos < ball->yPos) {
+				panelTwo->vel = 2.0f;
+			}
+
+			else if (panelTwo->pos > ball->yPos) {
+				panelTwo->vel = -2.0f;
+			}
+		}
+		else {
+			panelTwo->vel = 0.0f;
+		}
+
+
+		panelTwo->pos += panelTwo->vel*elapsed;
+
+		ball->update();
+		ball->xPos += ball->xVel*elapsed*2.0f;
+		ball->yPos += ball->yVel*elapsed*2.0f;
+
 		program.setModelMatrix(modelMatrix);
 		program.setProjectionMatrix(projectionMatrix);
 		program.setViewMatrix(viewMatrix);
@@ -234,31 +257,6 @@ int main(int argc, char *argv[])
 		modelMatrix.identity();
 		panelOneMatrix.identity();
 		panelTwoMatrix.identity();
-
-		panelOne->update();
-		panelTwo->update();
-		panelOne->pos += panelOne->vel*elapsed;
-		if (ball->xVel > 0) {
-			if (panelTwo->pos < ball->yPos) {
-				panelTwo->vel = 2.0f;
-			}
-
-			else if (panelTwo->pos > ball->yPos) {
-				panelTwo->vel = -2.0f;
-			}
-		}
-		else {
-			panelTwo->vel = 0.0f;
-		}
-
-
-		panelTwo->pos += panelTwo->vel*elapsed;
-
-		ball->update();
-		ball->xPos += ball->xVel*elapsed*2.0f;
-		ball->yPos += ball->yVel*elapsed*2.0f;
-
-		angle += elapsed;
 
 		modelMatrix.Translate(ball->xPos, ball->yPos, 0.0f);
 		modelMatrix.Scale(0.2f, 0.2f, 1.0f);
