@@ -1,6 +1,7 @@
 #pragma once
 #include "Chunk.h"
 #include <vector>
+#include "Player.h"
 
 class Map {
 public:
@@ -13,10 +14,11 @@ public:
 	Chunk* FirstChunk;
 	Chunk* CurrentChunk;
 
-	void CreateChunk(int direction);
+	void CreateChunk(int direction, int seed);
 	void Draw();
 	void Update();
-	void SetUp();
+	void SetUp(int seed);
+	void CheckPosition(int position, Player*, int);
 	Map();
 	~Map();
 

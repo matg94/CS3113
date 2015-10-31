@@ -17,13 +17,20 @@ public:
 	int CurrentAnimationIndex;
 	int RunAnimation[4];
 	int JumpAnimation[4];
-	bool InAir;
 	float AnimationElapsed;
+	int Position;
+	
+	bool CollidedLeft;
+	bool CollidedRight;
+	bool CollidedTop;
+	bool CollidedBottom;
 
 	Player();
 
+	float lerp(float, float, float);
 	void Update(float, Chunk*);
-	void Animate();
+	void Animate(float);
+	void AnimateWalking();
 	void Draw(int, int, int, ShaderProgram*);
 	void Jump();
 	void CheckCollision(Chunk*, int);

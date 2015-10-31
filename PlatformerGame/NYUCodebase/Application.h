@@ -31,9 +31,13 @@ public:
 	Matrix viewMatrix;
 	Matrix tileMatrix;
 	ShaderProgram* program;
+	Mix_Chunk* jumpSound;
+	Mix_Chunk* destroySound;
 	float LastFrameTick;
+	bool screen;
 
 	GLuint TileTextureSheet;
+	GLuint Font;
 	Player* player;
 	Map* map;
 
@@ -44,7 +48,8 @@ public:
 	void Render();
 	void CheckCollisions(Player* player);
 	void DrawText(int, std::string, float, float);
-	void DrawChunk(int, Chunk*, float);
+	void DrawChunk(int, Chunk*, float, int);
 	GLuint LoadTexture(const char*);
+	void StartScreen();
 
 };

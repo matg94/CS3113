@@ -10,5 +10,6 @@ public:
 	int textureIndex;
 
 	Tile(int);
+	void update();
 
 };
